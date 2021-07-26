@@ -14,6 +14,14 @@ config/name="dream-within-a-dream"
 run/main_scene="res://levels/Sandbox.tscn"
 config/icon="res://icon.png"
 
+[display]
+
+window/size/width=660
+window/size/height=495
+window/size/test_width=1320
+window/size/test_height=990
+window/stretch/mode="2d"
+
 [input]
 
 player_move_left={
@@ -47,4 +55,5 @@ common/enable_pause_aware_picking=true
 
 [rendering]
 
+quality/driver/fallback_to_gles2=true
 environment/default_environment="res://default_env.tres"
