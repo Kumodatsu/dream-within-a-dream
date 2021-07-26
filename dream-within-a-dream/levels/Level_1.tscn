@@ -10,6 +10,11 @@ position = Vector2( 36.0167, 441.955 )
 
 [node name="Camera2D" type="Camera2D" parent="Jacob"]
 current = true
+limit_left = 0
+limit_top = 0
+limit_right = 2640
+limit_bottom = 495
+editor_draw_limits = true
 
 [node name="TileMaps" type="Node2D" parent="."]
 
