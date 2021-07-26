@@ -2,15 +2,15 @@
 
 importer="texture"
 type="StreamTexture"
-path="res://.import/jacob-full.png-d50c24965b4bea60489a64fdd209e321.stex"
+path="res://.import/jacob-walk-05.png-b73caf08824d6013398d77a492d9238d.stex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://assets/sprites/jacob-full.png"
-dest_files=[ "res://.import/jacob-full.png-d50c24965b4bea60489a64fdd209e321.stex" ]
+source_file="res://assets/sprites/jacob/jacob-walk-05.png"
+dest_files=[ "res://.import/jacob-walk-05.png-b73caf08824d6013398d77a492d9238d.stex" ]
 
 [params]
 
