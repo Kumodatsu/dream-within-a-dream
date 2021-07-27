@@ -1,13 +1,13 @@
 extends KinematicBody2D
 
 # Horizontal speed when moving.
-export var max_speed:      float =  200.0
+export var max_speed:      float =  120.0
 # How fast the player accelerates down while airborne.
 export var gravity:        float =   20.0
 # The vertical speed at which the player stops accelerating while falling.
 export var max_fall_speed: float =  600.0
 # Initial upwards speed when starting a jump.
-export var jump_force:     float =  600.0
+export var jump_force:     float =  390.0
 # Number of airborne jumps that can be performed before touching the ground. 
 export var max_air_jumps:    int =    1   
 
