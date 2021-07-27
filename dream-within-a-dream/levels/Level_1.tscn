@@ -1,11 +1,10 @@
-[gd_scene load_steps=8 format=2]
+[gd_scene load_steps=7 format=2]
 
 [ext_resource path="res://tilesets/Tileset.tres" type="TileSet" id=1]
 [ext_resource path="res://entities/Jacob.tscn" type="PackedScene" id=2]
 [ext_resource path="res://assets/sprites/backgrounds/bg-world-1.png" type="Texture" id=3]
-[ext_resource path="res://entities/Heart.tscn" type="PackedScene" id=4]
-[ext_resource path="res://assets/sprites/pickups/heart.png" type="Texture" id=5]
 [ext_resource path="res://scripts/health_hud.gd" type="Script" id=6]
+[ext_resource path="res://entities/Berend.tscn" type="PackedScene" id=7]
 
 [sub_resource type="RectangleShape2D" id=1]
 
@@ -48,6 +47,17 @@ collision_mask = 49
 format = 1
 tile_data = PoolIntArray( -65456, 6, 65537, 80, 6, 65537, 65616, 6, 65537, 131101, 0, 0, 131152, 6, 65537, 196688, 6, 65537, 262224, 6, 65537, 327695, 0, 0, 327707, 1, 0, 327760, 6, 65537, 393296, 6, 65537, 458832, 6, 65537, 524368, 6, 65537, 589836, 1, 0, 589879, 0, 0, 589904, 6, 65537, 655417, 0, 0, 655440, 6, 65537, 720964, 0, 0, 720976, 6, 65537, 786440, 0, 0, 786493, 9, 0, 786494, 9, 1, 786495, 9, 1, 786496, 9, 1, 786497, 9, 1, 786498, 9, 2, 786502, 0, 0, 786512, 6, 65537, 852038, 18, 0, 852039, 16, 0, 852048, 6, 65537, 917548, 1, 0, 917556, 1, 0, 917574, 19, 0, 917575, 17, 0, 917584, 6, 65537, 983120, 6, 65537 )
 
+[node name="Enemies" type="Node2D" parent="."]
+
+[node name="Berend1" parent="Enemies" instance=ExtResource( 7 )]
+position = Vector2( 331.415, 304.688 )
+
+[node name="Berend2" parent="Enemies" instance=ExtResource( 7 )]
+position = Vector2( 427.632, 140.762 )
+
+[node name="Berend3" parent="Enemies" instance=ExtResource( 7 )]
+position = Vector2( 838.337, 205.798 )
+
 [node name="ParallaxBackground" type="ParallaxBackground" parent="."]
 
 [node name="FloatingIsles" type="ParallaxLayer" parent="ParallaxBackground"]
@@ -70,29 +80,11 @@ __meta__ = {
 scale = Vector2( 140, 1 )
 shape = SubResource( 1 )
 
-[node name="Heart" parent="." instance=ExtResource( 4 )]
-position = Vector2( 179.304, 443.832 )
-
 [node name="HUD" type="CanvasLayer" parent="."]
 
 [node name="Health" type="Node2D" parent="HUD"]
 position = Vector2( 1, 1 )
 script = ExtResource( 6 )
-
-[node name="Heart0" type="Sprite" parent="HUD"]
-visible = false
-position = Vector2( 21, 21 )
-texture = ExtResource( 5 )
-
-[node name="Heart1" type="Sprite" parent="HUD"]
-visible = false
-position = Vector2( 42, 21 )
-texture = ExtResource( 5 )
-
-[node name="Heart2" type="Sprite" parent="HUD"]
-visible = false
-position = Vector2( 63, 21 )
-texture = ExtResource( 5 )
 
 [connection signal="health_changed" from="Jacob" to="HUD/Health" method="_on_player_health_changed"]
 [connection signal="body_entered" from="DeathZone" to="Jacob" method="_on_death_zone_entered"]
