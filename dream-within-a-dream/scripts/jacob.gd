@@ -13,12 +13,14 @@ export var max_air_jumps:    int =    1
 # Number of hits the player can take before dying.
 export var max_health:       int =    3 
 
+signal health_changed
+
 var velocity:  Vector2 = Vector2.ZERO
 var air_jumps: int     = max_air_jumps
 var health:    int     = max_health
 
 func _ready():
-    pass
+    emit_signal("health_changed", health, max_health)
 
 func _physics_process(_delta: float):
     var on_floor = is_on_floor()
@@ -49,6 +51,7 @@ func change_health(n: int):
     health = health + n
     if health > max_health:
         health = max_health
+    emit_signal("health_changed", health, max_health)
     if health <= 0:
         die()
 
