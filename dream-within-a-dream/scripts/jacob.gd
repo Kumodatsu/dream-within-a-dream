@@ -55,3 +55,7 @@ func handle_animations(on_floor: bool):
         $AnimatedSprite.play("Walk")
     else:
         $AnimatedSprite.play("Idle")
+
+func _on_death_zone_entered(body: Node):
+    if body.get_name() == "Jacob":
+        var _ret = get_tree().reload_current_scene()

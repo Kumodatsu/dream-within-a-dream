@@ -1,8 +1,10 @@
-[gd_scene load_steps=4 format=2]
+[gd_scene load_steps=5 format=2]
 
 [ext_resource path="res://tilesets/Tileset.tres" type="TileSet" id=1]
 [ext_resource path="res://entities/Jacob.tscn" type="PackedScene" id=2]
 [ext_resource path="res://assets/sprites/backgrounds/bg-world-1.png" type="Texture" id=3]
+
+[sub_resource type="RectangleShape2D" id=1]
 
 [node name="Level" type="Node2D"]
 
@@ -40,9 +42,22 @@ tile_data = PoolIntArray( -65456, 6, 65537, 80, 6, 65537, 65616, 6, 65537, 13110
 [node name="ParallaxBackground" type="ParallaxBackground" parent="."]
 
 [node name="FloatingIsles" type="ParallaxLayer" parent="ParallaxBackground"]
+visible = false
 motion_scale = Vector2( 0.7, 0.7 )
 motion_mirroring = Vector2( 2640, 495 )
 
 [node name="Sprite" type="Sprite" parent="ParallaxBackground/FloatingIsles"]
 texture = ExtResource( 3 )
 centered = false
+
+[node name="DeathZone" type="Area2D" parent="."]
+position = Vector2( 1320, 520 )
+__meta__ = {
+"_edit_group_": true
+}
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="DeathZone"]
+scale = Vector2( 140, 1 )
+shape = SubResource( 1 )
+
+[connection signal="body_entered" from="DeathZone" to="Jacob" method="_on_death_zone_entered"]
