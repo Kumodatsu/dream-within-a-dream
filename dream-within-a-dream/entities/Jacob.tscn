@@ -8,6 +8,7 @@ radius = 8.9682
 height = 4.51031
 
 [node name="Jacob" type="KinematicBody2D"]
+collision_mask = 30
 script = ExtResource( 2 )
 
 [node name="AnimatedSprite" type="AnimatedSprite" parent="."]

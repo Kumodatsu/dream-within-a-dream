@@ -9,10 +9,13 @@ export var max_fall_speed: float =  600.0
 # Initial upwards speed when starting a jump.
 export var jump_force:     float =  390.0
 # Number of airborne jumps that can be performed before touching the ground. 
-export var max_air_jumps:    int =    1   
+export var max_air_jumps:    int =    1
+# Number of hits the player can take before dying.
+export var max_health:       int =    3 
 
 var velocity:  Vector2 = Vector2.ZERO
 var air_jumps: int     = max_air_jumps
+var health:    int     = max_health
 
 func _ready():
     pass
@@ -42,6 +45,16 @@ func jump(on_floor: bool):
         air_jumps -= 1
     velocity.y = -jump_force
 
+func change_health(n: int):
+    health = health + n
+    if health > max_health:
+        health = max_health
+    if health <= 0:
+        die()
+
+func die():
+    var _ret = get_tree().reload_current_scene()
+
 func handle_animations(on_floor: bool):
     var horizontally_still = abs(velocity.x) == 0.0
     var facing_right       = velocity.x >= 0.0
@@ -57,5 +70,5 @@ func handle_animations(on_floor: bool):
         $AnimatedSprite.play("Idle")
 
 func _on_death_zone_entered(body: Node):
-    if body.get_name() == "Jacob":
-        var _ret = get_tree().reload_current_scene()
+    if body == self:
+        die()
