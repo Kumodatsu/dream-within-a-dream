@@ -1,14 +1,13 @@
-[gd_scene load_steps=3 format=2]
+[gd_scene load_steps=4 format=2]
 
 [ext_resource path="res://tilesets/Tileset.tres" type="TileSet" id=1]
 [ext_resource path="res://entities/Jacob.tscn" type="PackedScene" id=2]
+[ext_resource path="res://assets/sprites/backgrounds/bg-world-1.png" type="Texture" id=3]
 
 [node name="Level" type="Node2D"]
 
 [node name="Jacob" parent="." instance=ExtResource( 2 )]
 position = Vector2( 36.0167, 441.955 )
-max_speed = 120.0
-jump_force = 390.0
 
 [node name="Camera2D" type="Camera2D" parent="Jacob"]
 current = true
@@ -37,3 +36,11 @@ tile_set = ExtResource( 1 )
 cell_size = Vector2( 33, 33 )
 format = 1
 tile_data = PoolIntArray( -65456, 6, 65537, 80, 6, 65537, 65616, 6, 65537, 131101, 0, 0, 131152, 6, 65537, 196688, 6, 65537, 262224, 6, 65537, 327695, 0, 0, 327707, 1, 0, 327760, 6, 65537, 393296, 6, 65537, 458832, 6, 65537, 524368, 6, 65537, 589836, 1, 0, 589879, 0, 0, 589904, 6, 65537, 655417, 0, 0, 655440, 6, 65537, 720964, 0, 0, 720976, 6, 65537, 786440, 0, 0, 786493, 9, 0, 786494, 9, 1, 786495, 9, 1, 786496, 9, 1, 786497, 9, 1, 786498, 9, 2, 786502, 0, 0, 786512, 6, 65537, 852038, 18, 0, 852039, 16, 0, 852048, 6, 65537, 917548, 1, 0, 917556, 1, 0, 917574, 19, 0, 917575, 17, 0, 917584, 6, 65537, 983120, 6, 65537 )
+
+[node name="ParallaxBackground" type="ParallaxBackground" parent="."]
+
+[node name="FloatingIsles" type="ParallaxLayer" parent="ParallaxBackground"]
+
+[node name="Sprite" type="Sprite" parent="ParallaxBackground/FloatingIsles"]
+texture = ExtResource( 3 )
+centered = false
