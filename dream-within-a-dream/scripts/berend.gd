@@ -38,4 +38,5 @@ func change_direction(dir: int):
                            + direction * $CollisionShape2D.shape.extents.x
 
 func _on_body_entered(body: Node):
-    body.change_health(-1)
+    if body.get_collision_layer() == 1:
+        body.change_health(-1)
