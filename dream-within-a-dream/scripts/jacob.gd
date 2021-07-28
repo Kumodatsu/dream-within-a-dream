@@ -63,7 +63,9 @@ func handle_animations(on_floor: bool):
     var facing_right       = velocity.x >= 0.0
     
     if not horizontally_still:
-        $AnimatedSprite.flip_h = not facing_right
+        $AnimatedSprite.flip_h       = not facing_right
+        $CollisionShape2D.position.x = -sign(velocity.x) \
+                                     * abs($CollisionShape2D.position.x)
         
     if not on_floor:
         $AnimatedSprite.play("Air")

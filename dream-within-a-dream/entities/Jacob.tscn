@@ -3,9 +3,8 @@
 [ext_resource path="res://spriteframes/Jacob.tres" type="SpriteFrames" id=1]
 [ext_resource path="res://scripts/jacob.gd" type="Script" id=2]
 
-[sub_resource type="CapsuleShape2D" id=2]
-radius = 8.9682
-height = 4.51031
+[sub_resource type="RectangleShape2D" id=1]
+extents = Vector2( 7.5, 12 )
 
 [node name="Jacob" type="KinematicBody2D"]
 collision_mask = 30
@@ -17,5 +16,5 @@ animation = "Idle"
 playing = true
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-position = Vector2( -0.111362, -0.779533 )
-shape = SubResource( 2 )
+position = Vector2( -2.5, 0 )
+shape = SubResource( 1 )
