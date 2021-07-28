@@ -17,10 +17,14 @@ export            var jump_force:     float = 390.0
 export            var max_air_jumps:  int   = 1
 # Number of hits the player can take before dying.
 export            var max_health:     int   = 3
+# The maximum angle in degrees the arm is allowed to make with the x-axis.
+export            var max_arm_angle:  float = 85.0
 # The direction the player is walking.
 export(Direction) var direction:      int   = Direction.RIGHT
 
 signal health_changed
+
+onready var arm_offset: Vector2 = $Arm.position
 
 var velocity:  Vector2 = Vector2.ZERO
 var air_jumps: int     = max_air_jumps
@@ -32,7 +36,7 @@ func _ready():
 
 func _physics_process(_delta: float):
     var on_floor = is_on_floor()
-    # Movement
+    # Body movement
     if on_floor:
         air_jumps = max_air_jumps
     velocity.x = 0.0
@@ -46,6 +50,13 @@ func _physics_process(_delta: float):
     if Input.is_action_just_pressed("player_jump") and can_jump(on_floor):
         jump(on_floor)
     velocity = move_and_slide(velocity, Vector2.UP)
+    # Arm movement
+    var aim_pos: Vector2 = get_global_mouse_position()
+    var arm_pos: Vector2 = $Arm.global_position
+    var aim_dir: Vector2 = aim_pos - arm_pos
+    if aim_dir != Vector2.ZERO:
+        aim_dir = aim_dir.normalized()
+        rotate_arm(aim_dir)
     # Animation
     handle_animations(on_floor)
 
@@ -68,6 +79,17 @@ func change_health(n: int):
 func die():
     var _ret = get_tree().reload_current_scene()
 
+func rotate_arm(aim_dir: Vector2):
+    var angle: float = rad2deg(aim_dir.angle())
+    match direction:
+        Direction.LEFT:
+            if 180.0 - abs(angle) > max_arm_angle:
+                angle = sign(angle) * (180.0 - max_arm_angle)
+        Direction.RIGHT:
+            if abs(angle) > max_arm_angle:
+                angle = sign(angle) * max_arm_angle
+    $Arm.rotation_degrees = angle
+
 func handle_animations(on_floor: bool):
     if not on_floor:
         $AnimatedSprite.play("Air")
@@ -77,14 +99,12 @@ func handle_animations(on_floor: bool):
         $AnimatedSprite.play("Idle")
 
 func change_direction(dir: int):    
-    direction              = dir
-    $AnimatedSprite.flip_h = direction == Direction.LEFT
-    $Arm/Sprite.flip_h     = direction == Direction.LEFT
-    
+    direction                    = dir
+    $AnimatedSprite.flip_h       = direction == Direction.LEFT
+    $Arm/Sprite.flip_h           = direction == Direction.LEFT
+    $Arm.position.x              = direction * arm_offset.x
     $CollisionShape2D.position.x = -direction \
                                  * abs($CollisionShape2D.position.x)
-    $Arm.position.x              = direction \
-                                 * abs($Arm.position.x)
 
 func _on_death_zone_entered(body: Node):
     if body == self:

@@ -16,10 +16,11 @@ position = Vector2( -2.5, 0 )
 shape = SubResource( 1 )
 
 [node name="Arm" type="Node2D" parent="."]
-position = Vector2( 5, -1.5 )
+position = Vector2( -1, -4 )
 
 [node name="Sprite" type="Sprite" parent="Arm"]
 texture = ExtResource( 3 )
+centered = false
 
 [node name="AnimatedSprite" type="AnimatedSprite" parent="."]
 frames = ExtResource( 1 )
