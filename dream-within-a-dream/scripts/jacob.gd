@@ -1,17 +1,24 @@
 extends KinematicBody2D
 
+enum Direction {
+    LEFT  = -1,
+    RIGHT =  1
+}
+
 # Horizontal speed when moving.
-export var max_speed:      float = 120.0
+export            var max_speed:      float = 120.0
 # How fast the player accelerates down while airborne.
-export var gravity:        float = 20.0
+export            var gravity:        float = 20.0
 # The vertical speed at which the player stops accelerating while falling.
-export var max_fall_speed: float = 600.0
+export            var max_fall_speed: float = 600.0
 # Initial upwards speed when starting a jump.
-export var jump_force:     float = 390.0
+export            var jump_force:     float = 390.0
 # Number of airborne jumps that can be performed before touching the ground. 
-export var max_air_jumps:  int   = 1
+export            var max_air_jumps:  int   = 1
 # Number of hits the player can take before dying.
-export var max_health:     int   = 3 
+export            var max_health:     int   = 3
+# The direction the player is walking.
+export(Direction) var direction:      int   = Direction.RIGHT
 
 signal health_changed
 
@@ -21,6 +28,7 @@ var health:    int     = max_health
 
 func _ready():
     emit_signal("health_changed", health, max_health)
+    change_direction(direction)
 
 func _physics_process(_delta: float):
     var on_floor = is_on_floor()
@@ -32,6 +40,8 @@ func _physics_process(_delta: float):
         velocity.x = -max_speed
     if Input.is_action_pressed("player_move_right"):
         velocity.x = max_speed
+    if velocity.x != 0.0 and direction != sign(velocity.x):
+        change_direction(-direction)
     velocity.y = clamp(velocity.y + gravity, -INF, max_fall_speed)
     if Input.is_action_just_pressed("player_jump") and can_jump(on_floor):
         jump(on_floor)
@@ -59,20 +69,22 @@ func die():
     var _ret = get_tree().reload_current_scene()
 
 func handle_animations(on_floor: bool):
-    var horizontally_still = abs(velocity.x) == 0.0
-    var facing_right       = velocity.x >= 0.0
-    
-    if not horizontally_still:
-        $AnimatedSprite.flip_h       = not facing_right
-        $CollisionShape2D.position.x = -sign(velocity.x) \
-                                     * abs($CollisionShape2D.position.x)
-        
     if not on_floor:
         $AnimatedSprite.play("Air")
-    elif not horizontally_still:
+    elif abs(velocity.x) != 0.0:
         $AnimatedSprite.play("Walk")
     else:
         $AnimatedSprite.play("Idle")
+
+func change_direction(dir: int):    
+    direction              = dir
+    $AnimatedSprite.flip_h = direction == Direction.LEFT
+    $Arm/Sprite.flip_h     = direction == Direction.LEFT
+    
+    $CollisionShape2D.position.x = -direction \
+                                 * abs($CollisionShape2D.position.x)
+    $Arm.position.x              = direction \
+                                 * abs($Arm.position.x)
 
 func _on_death_zone_entered(body: Node):
     if body == self:
