@@ -36,11 +36,7 @@ func change_direction(dir: int):
     $FloorRay.position.x   = ray_offset \
                            + direction * $CollisionShape2D.shape.extents.x
 
-func _on_body_entered(body: Node):
-    if body.get_collision_layer() == 1:
-        body.change_health(-1)
-
-func _on_timeout():
+func shoot():
     var bullet  = load("res://entities/Bullet.tscn").instance()
     var offset = Vector2(direction * 50.0, 0.0)
     
@@ -50,4 +46,21 @@ func _on_timeout():
     
     get_tree().get_root().add_child(bullet)
     $GunshotSound.play()
-    $Timer.start()
+
+func _on_body_entered(body: Node):
+    if body.get_collision_layer() == 1:
+        body.change_health(-1)
+
+func _on_timeout():
+    velocity.x = 0.0
+    $AnimatedSprite.play("crouch")
+
+func _on_animation_finished():
+    match $AnimatedSprite.animation:
+        "crouch":
+            shoot()
+            $AnimatedSprite.play("stand-up")
+        "stand-up":
+            velocity.x = direction * max_speed
+            $AnimatedSprite.play("walk")
+            $Timer.start()
