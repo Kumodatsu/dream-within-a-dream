@@ -105,10 +105,10 @@ func handle_animations(on_floor: bool):
     else:
         $AnimatedSprite.play("Idle")
 
-func change_direction(dir: int):    
+func change_direction(dir: int):
     direction                    = dir
     $AnimatedSprite.flip_h       = direction == Direction.LEFT
-    $Arm/Sprite.flip_h           = direction == Direction.LEFT
+    $Arm/Sprite.flip_v           = direction == Direction.LEFT
     $Arm.position.x              = direction * arm_offset.x
     $CollisionShape2D.position.x = -direction \
                                  * abs($CollisionShape2D.position.x)
