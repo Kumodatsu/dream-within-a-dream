@@ -1,9 +1,10 @@
-[gd_scene load_steps=8 format=2]
+[gd_scene load_steps=9 format=2]
 
 [ext_resource path="res://tilesets/Tileset.tres" type="TileSet" id=1]
 [ext_resource path="res://entities/Jacob.tscn" type="PackedScene" id=2]
 [ext_resource path="res://assets/sprites/backgrounds/bg-world-1.png" type="Texture" id=3]
 [ext_resource path="res://entities/Edwin.tscn" type="PackedScene" id=4]
+[ext_resource path="res://entities/Portal.tscn" type="PackedScene" id=5]
 [ext_resource path="res://scripts/health_hud.gd" type="Script" id=6]
 [ext_resource path="res://entities/Berend.tscn" type="PackedScene" id=7]
 
@@ -110,6 +111,9 @@ shape = SubResource( 1 )
 [node name="Health" type="Node2D" parent="HUD"]
 position = Vector2( 1, 1 )
 script = ExtResource( 6 )
+
+[node name="Portal" parent="." instance=ExtResource( 5 )]
+position = Vector2( 2392.47, 445.536 )
 
 [connection signal="health_changed" from="Jacob" to="HUD/Health" method="_on_player_health_changed"]
 [connection signal="body_entered" from="DeathZone" to="Jacob" method="_on_death_zone_entered"]
