@@ -1,5 +1,9 @@
 extends KinematicBody2D
 
+# "I hope you didn't bring all of your dignity with you, 'cuz there'll be
+# nothing left when I'm done with you."
+# -Jacob Freud, 1896
+
 enum Direction {
     LEFT  = -1,
     RIGHT =  1
@@ -37,6 +41,7 @@ func _ready():
 func _input(event: InputEvent):
     if event.is_action_pressed("player_shoot"):
         var bullet = load("res://entities/Bullet.tscn").instance()
+        bullet.is_enemy         = false
         bullet.position         = $Arm.global_position
         bullet.rotation_degrees = $Arm.rotation_degrees
         get_tree().get_root().add_child(bullet)
