@@ -23,21 +23,22 @@ animations = [ {
 [sub_resource type="RectangleShape2D" id=3]
 extents = Vector2( 10, 22 )
 
-[sub_resource type="CapsuleShape2D" id=2]
-height = 22.0
+[sub_resource type="RectangleShape2D" id=4]
+extents = Vector2( 10, 22 )
 
 [node name="Berend" type="KinematicBody2D"]
-collision_layer = 0
+collision_layer = 16
 collision_mask = 2
 script = ExtResource( 11 )
 
 [node name="AnimatedSprite" type="AnimatedSprite" parent="."]
 frames = SubResource( 1 )
 animation = "walk"
-frame = 8
+frame = 7
 playing = true
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+visible = false
 position = Vector2( -4, 0 )
 shape = SubResource( 3 )
 
@@ -51,8 +52,7 @@ collision_mask = 2
 collision_layer = 16
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="HitZone"]
-visible = false
 position = Vector2( -4, 0 )
-shape = SubResource( 2 )
+shape = SubResource( 4 )
 
 [connection signal="body_entered" from="HitZone" to="." method="_on_body_entered"]

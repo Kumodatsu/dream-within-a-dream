@@ -34,6 +34,13 @@ func _ready():
     emit_signal("health_changed", health, max_health)
     change_direction(direction)
 
+func _input(event: InputEvent):
+    if event.is_action_pressed("player_shoot"):
+        var bullet = load("res://entities/Bullet.tscn").instance()
+        bullet.position         = $Arm.global_position
+        bullet.rotation_degrees = $Arm.rotation_degrees
+        get_tree().get_root().add_child(bullet)
+
 func _physics_process(_delta: float):
     var on_floor = is_on_floor()
     # Body movement
