@@ -40,6 +40,7 @@ func _input(event: InputEvent):
         bullet.position         = $Arm.global_position
         bullet.rotation_degrees = $Arm.rotation_degrees
         get_tree().get_root().add_child(bullet)
+        $GunshotSound.play()
 
 func _physics_process(_delta: float):
     var on_floor = is_on_floor()

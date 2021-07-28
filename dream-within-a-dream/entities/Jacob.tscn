@@ -1,8 +1,9 @@
-[gd_scene load_steps=5 format=2]
+[gd_scene load_steps=6 format=2]
 
 [ext_resource path="res://spriteframes/Jacob.tres" type="SpriteFrames" id=1]
 [ext_resource path="res://scripts/jacob.gd" type="Script" id=2]
 [ext_resource path="res://assets/sprites/jacob/jacob-arm.png" type="Texture" id=3]
+[ext_resource path="res://assets/sfx/gunshot.wav" type="AudioStream" id=4]
 
 [sub_resource type="RectangleShape2D" id=1]
 extents = Vector2( 7.5, 12 )
@@ -26,3 +27,6 @@ centered = false
 frames = ExtResource( 1 )
 animation = "Idle"
 playing = true
+
+[node name="GunshotSound" type="AudioStreamPlayer" parent="."]
+stream = ExtResource( 4 )
