@@ -21,3 +21,7 @@ func return_to_current_level():
     
 func get_level_path(level: int) -> String:
     return "%s%d.tscn" % [LEVEL_PATH, level]
+
+func _input(event: InputEvent):
+    if event.is_action_pressed("level_skip"):
+        advance_level()
