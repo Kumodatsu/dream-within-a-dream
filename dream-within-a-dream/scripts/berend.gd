@@ -24,13 +24,18 @@ func _ready():
 func _physics_process(_delta: float):
     velocity.y = clamp(velocity.y + gravity, -INF, max_fall_speed)
     velocity   = move_and_slide(velocity, Vector2.UP)
-    print($FloorRay.position)
     if is_on_wall() or is_on_floor() and not $FloorRay.is_colliding():
         change_direction(-1 * direction)
+
+func die():
+    queue_free()
 
 func change_direction(dir: int):
     direction              = dir
     velocity.x             = direction * max_speed
     $AnimatedSprite.flip_h = direction == Direction.LEFT
     $FloorRay.position.x   = ray_offset \
-                           + direction * $CollisionShape2D.shape.radius
+                           + direction * $CollisionShape2D.shape.extents.x
+
+func _on_body_entered(body: Node):
+    body.change_health(-1)

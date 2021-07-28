@@ -12,11 +12,6 @@
 
 [resource]
 animations = [ {
-"frames": [ ExtResource( 3 ), ExtResource( 6 ), ExtResource( 4 ), ExtResource( 2 ), ExtResource( 8 ), ExtResource( 9 ), ExtResource( 5 ), ExtResource( 1 ) ],
-"loop": true,
-"name": "Walk",
-"speed": 24.0
-}, {
 "frames": [ ExtResource( 7 ) ],
 "loop": true,
 "name": "Air",
@@ -26,4 +21,9 @@ animations = [ {
 "loop": true,
 "name": "Idle",
 "speed": 5.0
+}, {
+"frames": [ ExtResource( 3 ), ExtResource( 6 ), ExtResource( 4 ), ExtResource( 2 ), ExtResource( 8 ), ExtResource( 9 ), ExtResource( 5 ), ExtResource( 1 ) ],
+"loop": true,
+"name": "Walk",
+"speed": 24.0
 } ]
