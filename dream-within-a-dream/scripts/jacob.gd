@@ -6,7 +6,7 @@ enum Direction {
 }
 
 # Horizontal speed when moving.
-export            var max_speed:      float = 135.0
+export            var max_speed:      float = 150.0
 # How fast the player accelerates down while airborne.
 export            var gravity:        float = 20.0
 # The vertical speed at which the player stops accelerating while falling.
