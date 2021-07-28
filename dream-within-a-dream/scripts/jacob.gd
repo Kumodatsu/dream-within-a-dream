@@ -84,7 +84,8 @@ func change_health(n: int):
         die()
 
 func die():
-    var _ret = get_tree().reload_current_scene()
+    LevelManager.die()
+    LevelManager.return_to_current_level()
 
 func rotate_arm(aim_dir: Vector2):
     var angle: float = rad2deg(aim_dir.angle())

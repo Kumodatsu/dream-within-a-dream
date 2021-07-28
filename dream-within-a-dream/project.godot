@@ -14,6 +14,10 @@ config/name="dream-within-a-dream"
 run/main_scene="res://levels/Level_1.tscn"
 config/icon="res://icon.png"
 
+[autoload]
+
+LevelManager="*res://scripts/level_manager.gd"
+
 [display]
 
 window/size/width=660
