@@ -1,0 +1,96 @@
+[gd_scene load_steps=9 format=2]
+
+[ext_resource path="res://assets/sprites/backgrounds/bg-world-1.png" type="Texture" id=1]
+[ext_resource path="res://entities/Portal.tscn" type="PackedScene" id=2]
+[ext_resource path="res://entities/Jacob.tscn" type="PackedScene" id=3]
+[ext_resource path="res://entities/Edwin.tscn" type="PackedScene" id=4]
+[ext_resource path="res://entities/Berend.tscn" type="PackedScene" id=5]
+[ext_resource path="res://tilesets/Tileset.tres" type="TileSet" id=6]
+[ext_resource path="res://scripts/health_hud.gd" type="Script" id=7]
+
+[sub_resource type="RectangleShape2D" id=1]
+
+[node name="Level" type="Node2D"]
+
+[node name="TileMaps" type="Node2D" parent="."]
+
+[node name="Bottom" type="TileMap" parent="TileMaps"]
+tile_set = ExtResource( 6 )
+cell_size = Vector2( 33, 33 )
+collision_layer = 2
+collision_mask = 49
+format = 1
+
+[node name="Middle" type="TileMap" parent="TileMaps"]
+tile_set = ExtResource( 6 )
+cell_size = Vector2( 33, 33 )
+collision_layer = 2
+collision_mask = 49
+format = 1
+tile_data = PoolIntArray( -1, 6, 65537, -65456, 2, 65537, 65535, 6, 65537, 80, 2, 65537, 131071, 6, 65537, 65616, 2, 65537, 196607, 6, 65537, 131152, 2, 65537, 262143, 6, 65537, 196688, 2, 65537, 327679, 6, 65537, 262224, 2, 65537, 393215, 6, 65537, 327760, 2, 65537, 458751, 6, 65537, 524287, 6, 65537, 589823, 6, 65537, 655359, 6, 65537, 589904, 2, 65537, 720895, 6, 65537, 655440, 2, 65537, 786431, 6, 65537, 720976, 2, 65537, 851967, 6, 65537, 786512, 2, 65537, 917503, 6, 65537, 852048, 2, 65537, 983039, 6, 65537, 917584, 2, 65537, 983120, 2, 65537 )
+
+[node name="Top" type="TileMap" parent="TileMaps"]
+tile_set = ExtResource( 6 )
+cell_size = Vector2( 33, 33 )
+collision_layer = 2
+collision_mask = 49
+format = 1
+tile_data = PoolIntArray( -65456, 6, 65537, 80, 6, 65537, 65616, 6, 65537, 131152, 6, 65537, 196688, 6, 65537, 262224, 6, 65537, 327760, 6, 65537, 393296, 6, 65537, 458832, 6, 65537, 524368, 6, 65537, 589904, 6, 65537, 655440, 6, 65537, 720976, 6, 65537, 786512, 6, 65537, 852048, 6, 65537, 917584, 6, 65537, 983120, 6, 65537 )
+
+[node name="Portal" parent="." instance=ExtResource( 2 )]
+position = Vector2( 2293.5, 148.5 )
+
+[node name="Enemies" type="Node2D" parent="."]
+
+[node name="Berend1" parent="Enemies" instance=ExtResource( 5 )]
+position = Vector2( 520, 308 )
+
+[node name="Edwin1" parent="Enemies" instance=ExtResource( 4 )]
+position = Vector2( 809, 244 )
+scale = Vector2( -1, 1 )
+
+[node name="Jacob" parent="." instance=ExtResource( 3 )]
+position = Vector2( 36.0167, 441.955 )
+
+[node name="Camera2D" type="Camera2D" parent="Jacob"]
+current = true
+limit_left = 0
+limit_top = 0
+limit_right = 2640
+limit_bottom = 495
+editor_draw_limits = true
+
+[node name="ParallaxBackground" type="ParallaxBackground" parent="."]
+
+[node name="FloatingIsles" type="ParallaxLayer" parent="ParallaxBackground"]
+motion_scale = Vector2( 0.7, 0.7 )
+motion_mirroring = Vector2( 2640, 495 )
+__meta__ = {
+"_edit_group_": true,
+"_edit_lock_": true
+}
+
+[node name="Sprite" type="Sprite" parent="ParallaxBackground/FloatingIsles"]
+texture = ExtResource( 1 )
+centered = false
+
+[node name="DeathZone" type="Area2D" parent="."]
+position = Vector2( 1320, 520 )
+collision_layer = 4
+collision_mask = 17
+__meta__ = {
+"_edit_group_": true
+}
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="DeathZone"]
+scale = Vector2( 140, 1 )
+shape = SubResource( 1 )
+
+[node name="HUD" type="CanvasLayer" parent="."]
+
+[node name="Health" type="Node2D" parent="HUD"]
+position = Vector2( 1, 1 )
+script = ExtResource( 7 )
+
+[connection signal="health_changed" from="Jacob" to="HUD/Health" method="_on_player_health_changed"]
+[connection signal="body_entered" from="DeathZone" to="Jacob" method="_on_death_zone_entered"]
