@@ -1,0 +1,110 @@
+[gd_scene load_steps=9 format=2]
+
+[ext_resource path="res://tilesets/Tileset.tres" type="TileSet" id=1]
+[ext_resource path="res://entities/Jacob.tscn" type="PackedScene" id=2]
+[ext_resource path="res://assets/sprites/backgrounds/bg-world-1.png" type="Texture" id=3]
+[ext_resource path="res://entities/Edwin.tscn" type="PackedScene" id=4]
+[ext_resource path="res://entities/Portal.tscn" type="PackedScene" id=5]
+[ext_resource path="res://scripts/health_hud.gd" type="Script" id=6]
+[ext_resource path="res://entities/Berend.tscn" type="PackedScene" id=7]
+
+[sub_resource type="RectangleShape2D" id=1]
+
+[node name="Level" type="Node2D"]
+
+[node name="TileMaps" type="Node2D" parent="."]
+
+[node name="Bottom" type="TileMap" parent="TileMaps"]
+tile_set = ExtResource( 1 )
+cell_size = Vector2( 33, 33 )
+collision_layer = 2
+collision_mask = 49
+format = 1
+
+[node name="Middle" type="TileMap" parent="TileMaps"]
+tile_set = ExtResource( 1 )
+cell_size = Vector2( 33, 33 )
+collision_layer = 2
+collision_mask = 49
+format = 1
+tile_data = PoolIntArray( -1, 6, 65537, -65456, 2, 65537, 65535, 6, 65537, 80, 2, 65537, 131071, 6, 65537, 65616, 2, 65537, 196607, 6, 65537, 131152, 2, 65537, 262143, 6, 65537, 196688, 2, 65537, 327679, 6, 65537, 262163, 10, 0, 262224, 2, 65537, 393215, 6, 65537, 327689, 2, 0, 327690, 2, 2, 327725, 2, 0, 327726, 2, 1, 327727, 2, 2, 327760, 2, 65537, 458751, 6, 65537, 393225, 2, 262144, 393226, 2, 262146, 393241, 10, 0, 393261, 2, 327680, 393262, 2, 196608, 393263, 2, 262146, 393275, 7, 0, 393276, 7, 1, 393277, 7, 2, 524287, 6, 65537, 458761, 2, 65536, 458762, 2, 262146, 458798, 2, 65536, 458799, 2, 262146, 458805, 2, 0, 458806, 2, 2, 458811, 7, 65536, 458812, 7, 65537, 458813, 7, 65538, 589823, 6, 65537, 524297, 2, 65536, 524298, 2, 131074, 524299, 2, 1, 524300, 2, 1, 524301, 2, 2, 524327, 2, 0, 524328, 2, 2, 524334, 2, 262144, 524335, 2, 131074, 524336, 2, 1, 524337, 2, 1, 524338, 2, 1, 524339, 2, 1, 524340, 2, 1, 524341, 2, 131072, 524342, 2, 65538, 524354, 10, 0, 655359, 6, 65537, 589833, 2, 65536, 589834, 2, 262145, 589835, 2, 65537, 589836, 2, 262145, 589837, 2, 65538, 589840, 8, 0, 589841, 8, 2, 589863, 2, 262144, 589864, 2, 131074, 589865, 2, 1, 589866, 2, 1, 589867, 2, 1, 589868, 2, 1, 589869, 2, 1, 589870, 2, 131072, 589871, 2, 196610, 589872, 2, 327681, 589873, 2, 327681, 589874, 2, 327681, 589875, 2, 327681, 589876, 2, 327681, 589877, 2, 327681, 589878, 2, 327682, 589904, 2, 65537, 720895, 6, 65537, 655369, 2, 327680, 655370, 2, 327681, 655371, 2, 327681, 655372, 2, 327681, 655373, 2, 327682, 655376, 8, 65536, 655377, 8, 65538, 655390, 9, 0, 655391, 9, 1, 655392, 9, 1, 655393, 9, 1, 655394, 9, 1, 655395, 9, 2, 655399, 2, 262144, 655400, 2, 65537, 655401, 2, 262145, 655402, 2, 262145, 655403, 2, 65537, 655404, 2, 65537, 655405, 2, 262145, 655406, 2, 65537, 655407, 2, 65538, 655440, 2, 65537, 786431, 6, 65537, 720915, 2, 0, 720916, 2, 2, 720935, 2, 327680, 720936, 2, 327681, 720937, 2, 327681, 720938, 2, 327681, 720939, 2, 327681, 720940, 2, 327681, 720941, 2, 327681, 720942, 2, 327681, 720943, 2, 327682, 720976, 2, 65537, 851967, 6, 65537, 786451, 2, 65536, 786452, 2, 65538, 786512, 2, 65537, 917503, 2, 0, 851968, 2, 2, 851977, 2, 0, 851978, 2, 1, 851979, 2, 1, 851980, 2, 2, 851983, 2, 0, 851984, 2, 2, 851987, 2, 65536, 851988, 2, 262146, 852048, 2, 65537, 983039, 2, 262144, 917504, 2, 131074, 917505, 2, 1, 917506, 2, 1, 917507, 2, 1, 917508, 2, 1, 917509, 2, 1, 917510, 2, 1, 917511, 2, 1, 917512, 2, 1, 917513, 2, 131072, 917514, 2, 262145, 917515, 2, 65537, 917516, 2, 262146, 917519, 2, 65536, 917520, 2, 131074, 917521, 2, 1, 917522, 2, 1, 917523, 2, 131072, 917524, 2, 262146, 917579, 9, 0, 917580, 9, 1, 917581, 9, 1, 917582, 9, 2, 917584, 2, 65537, 1048575, 2, 327680, 983040, 2, 327681, 983041, 2, 327681, 983042, 2, 327681, 983043, 2, 327681, 983044, 2, 327681, 983045, 2, 327681, 983046, 2, 327681, 983047, 2, 327681, 983048, 2, 327681, 983049, 2, 327681, 983050, 2, 327681, 983051, 2, 327681, 983052, 2, 327682, 983055, 2, 327680, 983056, 2, 327681, 983057, 2, 327681, 983058, 2, 327681, 983059, 2, 327681, 983060, 2, 327682, 983120, 2, 65537 )
+
+[node name="Top" type="TileMap" parent="TileMaps"]
+tile_set = ExtResource( 1 )
+cell_size = Vector2( 33, 33 )
+collision_layer = 2
+collision_mask = 49
+format = 1
+tile_data = PoolIntArray( -65456, 6, 65537, 80, 6, 65537, 65616, 6, 65537, 131152, 6, 65537, 196688, 6, 65537, 262158, 10, 0, 262224, 6, 65537, 327760, 6, 65537, 393296, 6, 65537, 458832, 6, 65537, 524368, 6, 65537, 589836, 1, 0, 589904, 6, 65537, 655404, 0, 0, 655440, 6, 65537, 720976, 6, 65537, 786512, 6, 65537, 852048, 6, 65537, 917584, 6, 65537, 983120, 6, 65537 )
+
+[node name="Portal" parent="." instance=ExtResource( 5 )]
+position = Vector2( 2590.5, 445.5 )
+
+[node name="Enemies" type="Node2D" parent="."]
+
+[node name="Berend1" parent="Enemies" instance=ExtResource( 7 )]
+position = Vector2( 254, 440 )
+
+[node name="Berend2" parent="Enemies" instance=ExtResource( 7 )]
+position = Vector2( 583, 440 )
+
+[node name="Berend3" parent="Enemies" instance=ExtResource( 7 )]
+position = Vector2( 1383, 275 )
+
+[node name="Berend4" parent="Enemies" instance=ExtResource( 7 )]
+position = Vector2( 1602, 242 )
+
+[node name="Berend5" parent="Enemies" instance=ExtResource( 7 )]
+position = Vector2( 2497, 440 )
+
+[node name="Berend6" parent="Enemies" instance=ExtResource( 7 )]
+position = Vector2( 2552, 440 )
+
+[node name="Edwin1" parent="Enemies" instance=ExtResource( 4 )]
+position = Vector2( 357, 145 )
+
+[node name="Jacob" parent="." instance=ExtResource( 2 )]
+position = Vector2( 51, 450 )
+
+[node name="Camera2D" type="Camera2D" parent="Jacob"]
+current = true
+limit_left = 0
+limit_top = 0
+limit_right = 2640
+limit_bottom = 495
+editor_draw_limits = true
+
+[node name="ParallaxBackground" type="ParallaxBackground" parent="."]
+
+[node name="FloatingIsles" type="ParallaxLayer" parent="ParallaxBackground"]
+motion_scale = Vector2( 0.7, 0.7 )
+motion_mirroring = Vector2( 2640, 495 )
+__meta__ = {
+"_edit_group_": true,
+"_edit_lock_": true
+}
+
+[node name="Sprite" type="Sprite" parent="ParallaxBackground/FloatingIsles"]
+texture = ExtResource( 3 )
+centered = false
+
+[node name="DeathZone" type="Area2D" parent="."]
+position = Vector2( 1320, 520 )
+collision_layer = 4
+collision_mask = 17
+__meta__ = {
+"_edit_group_": true
+}
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="DeathZone"]
+scale = Vector2( 140, 1 )
+shape = SubResource( 1 )
+
+[node name="HUD" type="CanvasLayer" parent="."]
+
+[node name="Health" type="Node2D" parent="HUD"]
+position = Vector2( 1, 1 )
+script = ExtResource( 6 )
+
+[connection signal="health_changed" from="Jacob" to="HUD/Health" method="_on_player_health_changed"]
+[connection signal="body_entered" from="DeathZone" to="Jacob" method="_on_death_zone_entered"]
