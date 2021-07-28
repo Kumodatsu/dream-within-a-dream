@@ -6,7 +6,7 @@ enum Direction {
 }
 
 # Horizontal speed when moving.
-export            var max_speed:      float = 100.0
+export            var max_speed:      float = 130.0
 # Direction the enemy is walking.
 export(Direction) var direction:      int   = Direction.LEFT
 # How fast the enemy accelerates down while airborne.
