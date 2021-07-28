@@ -1,6 +1,6 @@
 extends Node
 
-const WIN_PATH   = "res://WinScreen.tscn"
+const WIN_PATH   = "res://scenes/WinScreen.tscn"
 const LEVEL_PATH = "res://levels/Level_"
 
 var current_level = 1
