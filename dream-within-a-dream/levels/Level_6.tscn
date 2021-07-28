@@ -1,0 +1,121 @@
+[gd_scene load_steps=9 format=2]
+
+[ext_resource path="res://assets/sprites/backgrounds/bg-world-2.png" type="Texture" id=1]
+[ext_resource path="res://entities/Portal.tscn" type="PackedScene" id=2]
+[ext_resource path="res://entities/Jacob.tscn" type="PackedScene" id=3]
+[ext_resource path="res://entities/Cannon.tscn" type="PackedScene" id=4]
+[ext_resource path="res://entities/Heart.tscn" type="PackedScene" id=5]
+[ext_resource path="res://tilesets/Tileset.tres" type="TileSet" id=6]
+[ext_resource path="res://scripts/health_hud.gd" type="Script" id=7]
+
+[sub_resource type="RectangleShape2D" id=1]
+
+[node name="Level" type="Node2D"]
+
+[node name="TileMaps" type="Node2D" parent="."]
+
+[node name="Bottom" type="TileMap" parent="TileMaps"]
+tile_set = ExtResource( 6 )
+cell_size = Vector2( 33, 33 )
+collision_layer = 2
+collision_mask = 49
+format = 1
+
+[node name="Middle" type="TileMap" parent="TileMaps"]
+tile_set = ExtResource( 6 )
+cell_size = Vector2( 33, 33 )
+collision_layer = 2
+collision_mask = 49
+format = 1
+tile_data = PoolIntArray( -655361, 6, 65537, -720877, 5, 0, -720876, 5, 2, -589825, 6, 65537, -655341, 5, 262144, -655340, 5, 65538, -524289, 6, 65537, -589805, 5, 65536, -589804, 5, 262146, -458753, 6, 65537, -524269, 5, 65536, -524268, 5, 262146, -393217, 6, 65537, -458733, 5, 65536, -458732, 5, 65538, -327681, 6, 65537, -393197, 5, 262144, -393196, 5, 262146, -262145, 6, 65537, -327661, 5, 65536, -327660, 5, 65538, -196609, 6, 65537, -262125, 5, 65536, -262124, 5, 65538, -131073, 6, 65537, -196589, 5, 262144, -196588, 5, 65538, -65537, 6, 65537, -131053, 5, 65536, -131052, 5, 65538, -1, 6, 65537, -65529, 5, 0, -65528, 5, 2, -65517, 5, 262144, -65516, 5, 262146, 65535, 6, 65537, 7, 5, 262144, 8, 5, 65538, 19, 5, 262144, 20, 5, 65538, 131071, 6, 65537, 65543, 5, 65536, 65544, 5, 65538, 65555, 5, 65536, 65556, 5, 262146, 196607, 5, 0, 131072, 5, 1, 131073, 5, 1, 131074, 5, 2, 131079, 5, 262144, 131080, 5, 131074, 131081, 5, 2, 131083, 5, 0, 131084, 5, 1, 131085, 5, 1, 131086, 5, 1, 131087, 5, 1, 131088, 5, 2, 131091, 5, 65536, 131092, 5, 262146, 262143, 5, 262144, 196608, 5, 65537, 196609, 5, 262145, 196610, 5, 65538, 196615, 5, 65536, 196616, 5, 196610, 196617, 5, 327682, 196619, 5, 327680, 196620, 5, 327681, 196621, 5, 327681, 196622, 5, 327681, 196623, 5, 196608, 196624, 5, 131074, 196625, 5, 2, 196627, 5, 262144, 196628, 5, 262146, 327679, 5, 327680, 262144, 5, 327681, 262145, 5, 327681, 262146, 5, 327682, 262151, 5, 65536, 262152, 5, 262146, 262159, 5, 262144, 262160, 5, 196610, 262161, 5, 327682, 262163, 5, 262144, 262164, 5, 65538, 393215, 6, 65537, 327685, 5, 0, 327686, 5, 1, 327687, 5, 131072, 327688, 5, 262146, 327695, 5, 65536, 327696, 5, 65538, 327699, 5, 262144, 327700, 5, 262146, 458751, 6, 65537, 393220, 5, 0, 393221, 5, 131072, 393222, 5, 65537, 393223, 5, 262145, 393224, 5, 131074, 393225, 5, 2, 393227, 5, 0, 393228, 5, 1, 393229, 5, 1, 393230, 5, 1, 393231, 5, 131072, 393232, 5, 65538, 393235, 5, 262144, 393236, 5, 65538, 524287, 5, 0, 458752, 5, 2, 458755, 5, 0, 458756, 5, 131072, 458757, 5, 196610, 458758, 5, 327681, 458759, 5, 327681, 458760, 5, 327681, 458761, 5, 327682, 458763, 5, 65536, 458764, 5, 196610, 458765, 5, 327681, 458766, 5, 327681, 458767, 5, 327681, 458768, 5, 327682, 458770, 5, 0, 458771, 5, 131072, 458772, 5, 65538, 589823, 5, 327680, 524288, 5, 327682, 524291, 5, 327680, 524292, 5, 327681, 524293, 5, 327682, 524299, 5, 65536, 524300, 5, 262146, 524306, 5, 262144, 524307, 5, 262145, 524308, 5, 262146, 655359, 6, 65537, 589835, 5, 262144, 589836, 5, 65538, 589842, 5, 327680, 589843, 5, 327681, 589844, 5, 327682, 720895, 6, 65537, 655364, 5, 0, 655365, 5, 2, 655368, 5, 0, 655369, 5, 1, 655370, 5, 1, 655371, 5, 131072, 655372, 5, 65538, 655376, 13, 0, 655380, 6, 65537, 786431, 6, 65537, 720897, 5, 0, 720898, 5, 1, 720899, 5, 1, 720900, 5, 131072, 720901, 5, 131074, 720902, 5, 1, 720903, 5, 1, 720904, 5, 131072, 720905, 5, 65537, 720906, 5, 262145, 720907, 5, 65537, 720908, 5, 65538, 720916, 6, 65537, 851967, 6, 65537, 786433, 5, 327680, 786434, 5, 327681, 786435, 5, 327681, 786436, 5, 327681, 786437, 5, 327681, 786438, 5, 327681, 786439, 5, 327681, 786440, 5, 327681, 786441, 5, 327681, 786442, 5, 327681, 786443, 5, 327681, 786444, 5, 327682, 786449, 5, 0, 786450, 5, 1, 786451, 5, 1, 786452, 5, 2, 917503, 6, 65537, 851985, 5, 65536, 851986, 5, 65537, 851987, 5, 65537, 851988, 5, 262146, 983039, 6, 65537, 917518, 5, 0, 917519, 5, 1, 917520, 5, 1, 917521, 5, 131072, 917522, 5, 262145, 917523, 5, 262145, 917524, 5, 262146, 1048575, 6, 65537, 983040, 13, 0, 983049, 13, 0, 983054, 5, 327680, 983055, 5, 327681, 983056, 5, 327681, 983057, 5, 327681, 983058, 5, 327681, 983059, 5, 196608, 983060, 5, 262146, 1114111, 6, 65537, 1048595, 5, 262144, 1048596, 5, 262146, 1179647, 6, 65537, 1114112, 13, 0, 1114116, 13, 0, 1114124, 13, 0, 1114131, 5, 262144, 1114132, 5, 262146, 1245183, 6, 65537, 1179667, 5, 327680, 1179668, 5, 327682 )
+
+[node name="Top" type="TileMap" parent="TileMaps"]
+tile_set = ExtResource( 6 )
+cell_size = Vector2( 33, 33 )
+collision_layer = 2
+collision_mask = 49
+format = 1
+tile_data = PoolIntArray( 524307, 3, 0, 720907, 3, 0 )
+
+[node name="Portal" parent="." instance=ExtResource( 2 )]
+position = Vector2( 214.5, 346.5 )
+
+[node name="Enemies" type="Node2D" parent="."]
+
+[node name="Cannon" parent="Enemies" instance=ExtResource( 4 )]
+position = Vector2( 313, 49 )
+
+[node name="Cannon2" parent="Enemies" instance=ExtResource( 4 )]
+position = Vector2( 16, 214 )
+
+[node name="Cannon3" parent="Enemies" instance=ExtResource( 4 )]
+position = Vector2( 181, 313 )
+
+[node name="Cannon4" parent="Enemies" instance=ExtResource( 4 )]
+position = Vector2( 16, 544 )
+
+[node name="Cannon5" parent="Enemies" instance=ExtResource( 4 )]
+position = Vector2( 512, 445 )
+scale = Vector2( -1, 1 )
+
+[node name="Cannon6" parent="Enemies" instance=ExtResource( 4 )]
+position = Vector2( 149, 313 )
+scale = Vector2( -1, 1 )
+
+[node name="Cannon7" parent="Enemies" instance=ExtResource( 4 )]
+position = Vector2( 446, 181 )
+scale = Vector2( -1, 1 )
+
+[node name="Jacob" parent="." instance=ExtResource( 3 )]
+position = Vector2( 209, 153 )
+direction = -1
+
+[node name="Camera2D" type="Camera2D" parent="Jacob"]
+current = true
+limit_left = 0
+limit_top = 0
+limit_right = 660
+limit_bottom = 594
+editor_draw_limits = true
+
+[node name="Heart" parent="." instance=ExtResource( 5 )]
+position = Vector2( 479, 182 )
+
+[node name="Heart2" parent="." instance=ExtResource( 5 )]
+position = Vector2( 78, 11.5 )
+
+[node name="ParallaxBackground" type="ParallaxBackground" parent="."]
+
+[node name="FloatingIsles" type="ParallaxLayer" parent="ParallaxBackground"]
+motion_scale = Vector2( 0.7, 0.7 )
+motion_mirroring = Vector2( 2640, 495 )
+__meta__ = {
+"_edit_group_": true,
+"_edit_lock_": true
+}
+
+[node name="Sprite" type="Sprite" parent="ParallaxBackground/FloatingIsles"]
+texture = ExtResource( 1 )
+centered = false
+
+[node name="DeathZone" type="Area2D" parent="."]
+position = Vector2( 1320, 520 )
+collision_layer = 4
+collision_mask = 17
+__meta__ = {
+"_edit_group_": true
+}
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="DeathZone"]
+position = Vector2( 0, 100 )
+scale = Vector2( 140, 1 )
+shape = SubResource( 1 )
+
+[node name="HUD" type="CanvasLayer" parent="."]
+
+[node name="Health" type="Node2D" parent="HUD"]
+position = Vector2( 1, 1 )
+script = ExtResource( 7 )
+
+[connection signal="health_changed" from="Jacob" to="HUD/Health" method="_on_player_health_changed"]
+[connection signal="body_entered" from="DeathZone" to="Jacob" method="_on_death_zone_entered"]
