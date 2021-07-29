@@ -1,7 +1,7 @@
 extends KinematicBody2D
 
-# "Say hello to my little friend!"
-# -Rake Ricardo, 2014
+# "Say hello to my little fiend!"
+# -Buddy Bermhart, 2014
 
 enum Direction {
     LEFT  = -1,

@@ -1,6 +1,7 @@
-[gd_scene load_steps=7 format=2]
+[gd_scene load_steps=8 format=2]
 
 [ext_resource path="res://entities/Cannon.tscn" type="PackedScene" id=1]
+[ext_resource path="res://entities/Ich.tscn" type="PackedScene" id=2]
 [ext_resource path="res://entities/Jacob.tscn" type="PackedScene" id=3]
 [ext_resource path="res://assets/sprites/backgrounds/bg-world-3.png" type="Texture" id=4]
 [ext_resource path="res://tilesets/Tileset.tres" type="TileSet" id=6]
@@ -51,6 +52,10 @@ scale = Vector2( -1, 1 )
 [node name="Cannon4" parent="Enemies" instance=ExtResource( 1 )]
 position = Vector2( 908, 280 )
 scale = Vector2( -1, 1 )
+
+[node name="Ich" parent="Enemies" instance=ExtResource( 2 )]
+position = Vector2( 189, 130 )
+direction = 1
 
 [node name="Jacob" parent="." instance=ExtResource( 3 )]
 position = Vector2( 96, 417 )
