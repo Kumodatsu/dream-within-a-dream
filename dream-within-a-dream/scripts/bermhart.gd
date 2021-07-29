@@ -51,20 +51,15 @@ func _on_body_entered(body: Node):
         body.change_health(-1)
 
 func _on_timeout():
-    print("timeout end")
     velocity.x = 0.0
     $AnimatedSprite.play("crouch")
-    print("animation crouch")
 
 func _on_animation_finished():
     match $AnimatedSprite.animation:
         "crouch":
             shoot()
             $AnimatedSprite.play("stand-up")
-            print("animation stand-up")
         "stand-up":
             velocity.x = direction * max_speed
             $AnimatedSprite.play("walk")
-            print("animation walk")
             $Timer.start()
-            print("timeout start")
