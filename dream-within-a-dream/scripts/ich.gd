@@ -36,6 +36,8 @@ func die():
         return
     hp -= 1
     emit_signal("on_damage", hp, max_hp)
+    set_modulate(Color(0.9, 0.0, 0.0, 1.0))
+    $DamageTimer.start()
     if hp <= 0:
         velocity.x = 0.0
         $AnimatedSprite.play("explode")
@@ -65,15 +67,19 @@ func _on_body_entered(body: Node):
     if body.get_collision_layer() == 1:
         body.change_health(-1)
 
-func _on_timeout():
-    if $AnimatedSprite.animation == "explode":
-        return
-    $AnimatedSprite.play("spit")
-    shoot()
-
 func _on_animation_finished():
     match $AnimatedSprite.animation:
         "spit":
             $AnimatedSprite.play("float")
         "explode":
             LevelManager.advance_level()
+
+func _on_ice_timeout():
+    if $AnimatedSprite.animation == "explode":
+        return
+    $AnimatedSprite.play("spit")
+    shoot()
+
+
+func _on_damage_timeout():
+    set_modulate(Color(1.0, 1.0, 1.0, 1.0))

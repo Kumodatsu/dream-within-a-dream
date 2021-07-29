@@ -52,12 +52,17 @@ position = Vector2( 2, 0 )
 rotation = 0.123695
 shape = SubResource( 2 )
 
-[node name="Timer" type="Timer" parent="."]
+[node name="IceTimer" type="Timer" parent="."]
 wait_time = 2.0
 autostart = true
+
+[node name="DamageTimer" type="Timer" parent="."]
+wait_time = 0.1
+one_shot = true
 
 [node name="ExplosionSound" type="AudioStreamPlayer" parent="."]
 stream = ExtResource( 14 )
 
 [connection signal="animation_finished" from="AnimatedSprite" to="." method="_on_animation_finished"]
-[connection signal="timeout" from="Timer" to="." method="_on_timeout"]
+[connection signal="timeout" from="IceTimer" to="." method="_on_ice_timeout"]
+[connection signal="timeout" from="DamageTimer" to="." method="_on_damage_timeout"]
