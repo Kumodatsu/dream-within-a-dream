@@ -1,5 +1,8 @@
 extends KinematicBody2D
 
+# Emitted when the enemy is damaged, with hp and max_hp as parameters.
+signal on_damage
+
 enum Direction {
     LEFT  = -1,
     RIGHT =  1
@@ -32,6 +35,7 @@ func die():
     if hp <= 0:
         return
     hp -= 1
+    emit_signal("on_damage", hp, max_hp)
     if hp <= 0:
         velocity.x = 0.0
         $AnimatedSprite.play("explode")

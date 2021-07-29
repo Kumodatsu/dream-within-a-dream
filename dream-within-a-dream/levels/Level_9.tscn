@@ -1,13 +1,21 @@
-[gd_scene load_steps=8 format=2]
+[gd_scene load_steps=11 format=2]
 
 [ext_resource path="res://entities/Cannon.tscn" type="PackedScene" id=1]
 [ext_resource path="res://entities/Ich.tscn" type="PackedScene" id=2]
 [ext_resource path="res://entities/Jacob.tscn" type="PackedScene" id=3]
 [ext_resource path="res://assets/sprites/backgrounds/bg-world-3.png" type="Texture" id=4]
+[ext_resource path="res://scripts/boss_health.gd" type="Script" id=5]
 [ext_resource path="res://tilesets/Tileset.tres" type="TileSet" id=6]
 [ext_resource path="res://scripts/health_hud.gd" type="Script" id=7]
 
 [sub_resource type="RectangleShape2D" id=1]
+
+[sub_resource type="StyleBoxFlat" id=2]
+bg_color = Color( 0.796078, 0.0980392, 0.294118, 1 )
+border_color = Color( 0, 0, 0, 1 )
+
+[sub_resource type="StyleBoxFlat" id=3]
+bg_color = Color( 0.19, 0.0228, 0.0701733, 1 )
 
 [node name="Level" type="Node2D"]
 
@@ -100,5 +108,21 @@ shape = SubResource( 1 )
 position = Vector2( 1, 1 )
 script = ExtResource( 7 )
 
+[node name="BossHealth" type="ProgressBar" parent="HUD"]
+margin_left = 230.0
+margin_top = 15.0
+margin_right = 430.0
+margin_bottom = 29.0
+custom_styles/fg = SubResource( 2 )
+custom_styles/bg = SubResource( 3 )
+max_value = 1.0
+value = 1.0
+percent_visible = false
+script = ExtResource( 5 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[connection signal="on_damage" from="Enemies/Ich" to="HUD/BossHealth" method="_on_ich_damage"]
 [connection signal="health_changed" from="Jacob" to="HUD/Health" method="_on_player_health_changed"]
 [connection signal="body_entered" from="DeathZone" to="Jacob" method="_on_death_zone_entered"]
