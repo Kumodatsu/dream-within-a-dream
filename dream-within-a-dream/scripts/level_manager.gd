@@ -6,6 +6,12 @@ const LEVEL_PATH = "res://levels/Level_"
 var current_level = 1
 var death_count   = 0
 
+func _ready():
+    var scene = get_tree().current_scene.filename
+    print(scene)
+    if scene.begins_with(LEVEL_PATH):
+        current_level = int(scene)
+
 func die():
     death_count += 1
     
